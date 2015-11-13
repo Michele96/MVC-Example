@@ -13,11 +13,12 @@ class Bootstrap {
 			require $file;
 			$this->controller = new $url[0];
 		} else {
-			require 'controllers/error.php';
-			$this->controller = new Error();
+			$this->error();
 			$this->controller->index();
 			return;
 		}
+
+		$this->controller->loadModel($url[0]);
 
 		if (isset($url[2])) {
             if (method_exists($this->controller, $url[1])) {
@@ -34,4 +35,8 @@ class Bootstrap {
         $this->controller->index();
 	}
 
+	private function error() {
+		require 'controllers/error.php';
+		$this->controller = new Error();
+	}
 }

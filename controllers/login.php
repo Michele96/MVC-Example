@@ -10,4 +10,9 @@ class Login extends Controller {
 		$this->view->render('login/home');
 	}
 
+
+	public function doLogin($username = "Anonymus") {
+		$this->view->username = $username;
+		$this->view->render('login/doLogin');
+	}
 }
